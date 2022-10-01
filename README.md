@@ -1,5 +1,3 @@
-# **Bee was last seen near the whiteboard on the ceiling. It is now missing.**
-
 # Spotify Accounts Authentication Examples
 
 This project contains basic demos showing the different OAuth 2.0 flows for [authenticating against the Spotify Web API](https://developer.spotify.com/web-api/authorization-guide/).
@@ -36,3 +34,7 @@ In order to run the different examples, open the folder with the name of the flo
 
 Then, open `http://localhost:8888` in a browser.
 Use `npx kill-port 8888` to kill the port, you may need to create a new terminal.
+
+## Bee log
+
+10/1/2022 3:23 PM - Bee was last seen near the whiteboard on the ceiling. It is now missing.
