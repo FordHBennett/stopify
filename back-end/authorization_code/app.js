@@ -8,14 +8,16 @@
  */
 
 var express = require('express'); // Express web server framework
+var fetch = require('node-fetch');
 var request = require('request'); // "Request" library
 var cors = require('cors');
 var querystring = require('querystring');
 var cookieParser = require('cookie-parser');
+const { response } = require('express');
 
-var client_id = 'ba052ae60561496d81f726b812a79609'; // Your client id
-var client_secret = '465be8ea57234b86bfa6b27ea7469ac9'; // Your secret
-var redirect_uri = 'http://localhost:8888'; // Your redirect uri
+var client_id = 'd0b9b3b01a4c4977bb99be70d13c8e24'; // Your client id
+var client_secret = 'a79fa79340184ca6aebec28e555366f3'; // Your secret
+var redirect_uri = 'http://localhost:8888/callback'; // Your redirect uri
 
 /**
  * Generates a random string containing numbers and letters
@@ -41,6 +43,14 @@ app.use(express.static(__dirname + '/public'))
    .use(cookieParser());
 
 app.get('/login', function(req, res) {
+  var auth_query_parameters = new URLSearchParams({
+    response_type: 'code',
+    client_id: "d0b9b3b01a4c4977bb99be70d13c8e24",
+    scope: "",
+    redirect_uri: redirect_uri
+  })
+  res.redirect('https://accounts.spotify.com/authorize?' + auth_query_parameters.toString());
+  /*
 
   var state = generateRandomString(16);
   res.cookie(stateKey, state);
@@ -55,13 +65,32 @@ app.get('/login', function(req, res) {
       redirect_uri: redirect_uri,
       state: state
     }));
-});
+    */
+})
 
-app.get('/callback', function(req, res) {
+app.get("/callback", async (req, res) => {
 
   // your application requests refresh and access tokens
-  // after checking the state parameter
+  // after checking the state parameter'
 
+  const code = req.query.code;
+  var body = new URLSearchParams({
+    code: code,
+    redirect_uri: redirect_uri,
+    grant_type: "authorization_code"
+  })
+  const repsonse = await fetch("https://accounts.spotify.com/api/token", {
+    method: "post",
+    body: body,
+    headers: {
+      "Content-type": "application/x-www-form-urlencoded",
+      Authorization: 
+      "Basic" + Buffer.from(client_id + ":" + client_secret).toString("base64")
+    }
+  }) 
+  const data = await response.json();
+  console.log(data);
+  /*
   var code = req.query.code || null;
   var state = req.query.state || null;
   var storedState = req.cookies ? req.cookies[stateKey] : null;
@@ -117,9 +146,12 @@ app.get('/callback', function(req, res) {
       }
     });
   }
+  */
 });
 
 app.get('/refresh_token', function(req, res) {
+  console.log('refreshtoken');
+  /*
 
   // requesting access token from refresh token
   var refresh_token = req.query.refresh_token;
@@ -141,6 +173,7 @@ app.get('/refresh_token', function(req, res) {
       });
     }
   });
+  */
 });
 
 console.log('Listening on 8888');
