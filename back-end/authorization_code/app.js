@@ -7,9 +7,9 @@
  * https://developer.spotify.com/web-api/authorization-guide/#authorization_code_flow
  */
 
+
 var express = require('express'); // Express web server framework
 var fetch = require('node-fetch');
-var request = require('request'); // "Request" library
 var cors = require('cors');
 var querystring = require('querystring');
 var cookieParser = require('cookie-parser');
@@ -45,7 +45,7 @@ app.use(express.static(__dirname + '/public'))
 app.get('/login', function(req, res) {
   var auth_query_parameters = new URLSearchParams({
     response_type: 'code',
-    client_id: "d0b9b3b01a4c4977bb99be70d13c8e24",
+    client_id: client_id,
     scope: "",
     redirect_uri: redirect_uri
   })
@@ -69,7 +69,7 @@ app.get("/callback", async (req, res) => {
     headers: {
       "Content-type": "application/x-www-form-urlencoded",
       Authorization: 
-      "Basic" + Buffer.from(client_id + ":" + client_secret).toString("base64")
+      "Basic " + Buffer.from(client_id + ":" + client_secret).toString("base64")
     }
   }) 
   const data = await response.json();
