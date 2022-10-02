@@ -1,3 +1,4 @@
+npm install
 npm install -g express
 echo install express
 cd back-end
