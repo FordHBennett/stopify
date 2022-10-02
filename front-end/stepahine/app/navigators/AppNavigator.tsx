@@ -21,6 +21,8 @@ import {
   LoginScreen, // @demo remove-current-line
   WelcomeScreen,
 } from "../screens"
+import {TitleScreen} from "../screens/TitleScreen"
+import {JoinRoomScreen} from "../screens/JoinRoomScreen"
 import { DemoNavigator, DemoTabParamList } from "./DemoNavigator" // @demo remove-current-line
 import { navigationRef, useBackButtonHandler } from "./navigation-utilities"
 
@@ -39,9 +41,11 @@ import { navigationRef, useBackButtonHandler } from "./navigation-utilities"
  */
 export type AppStackParamList = {
   Welcome: undefined
+  Title: undefined
   Login: undefined // @demo remove-current-line
   Demo: NavigatorScreenParams<DemoTabParamList> // @demo remove-current-line
   // 🔥 Your screens go here
+  JoinRoom: undefined
 }
 
 /**
@@ -68,15 +72,15 @@ const AppStack = observer(function AppStack() {
   return (
     <Stack.Navigator
       screenOptions={{ headerShown: false }}
-      initialRouteName={isAuthenticated ? "Welcome" : "Login"} // @demo remove-current-line
+      initialRouteName={isAuthenticated ? "Title" : "Login"} // @demo remove-current-line
     >
       {/* @demo remove-block-start */}
       {isAuthenticated ? (
         <>
           {/* @demo remove-block-end */}
-          <Stack.Screen name="Welcome" component={WelcomeScreen} />
-          {/* @demo remove-block-start */}
-          <Stack.Screen name="Demo" component={DemoNavigator} />
+          {/* <Stack.Screen name="Welcome" component={WelcomeScreen} /> */}
+          <Stack.Screen name="Title" component={TitleScreen} />
+          <Stack.Screen name="JoinRoom" component={JoinRoomScreen} />
         </>
       ) : (
         <>

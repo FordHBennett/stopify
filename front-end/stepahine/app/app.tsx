@@ -7,7 +7,7 @@
  * what is going on here.
  *
  * The app navigation resides in ./app/navigators, so head over there
- * if you're interested in adding screens and navigators.
+ * if you're interested in adding screens and navigators
  */
 import "./i18n"
 import "./utils/ignore-warnings"
@@ -21,6 +21,8 @@ import * as storage from "./utils/storage"
 import { customFontsToLoad } from "./theme"
 import { setupReactotron } from "./services/reactotron"
 import Config from "./config"
+
+import { OnboardingScreen } from "./components/PaginatedDots"
 
 // Set up Reactotron, which is a free desktop app for inspecting and debugging
 // React Native apps. Learn more here: https://github.com/infinitered/reactotron

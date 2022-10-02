@@ -171,6 +171,10 @@
       "standard",
       "prettier"
     ],
+    "eslint.workingDirectories": [
+      "./components",
+      "./app"
+    ],
     "plugins": [
       "@typescript-eslint",
       "react",
