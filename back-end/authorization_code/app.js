@@ -91,7 +91,6 @@ async function getData(endpoint) {
 app.get("/dashboard", async (req, res) => {
   const userInfo = await getData("/users/pauljwbae");
   console.log(userInfo);
-  //res.render("dashboard");
 })
 
 console.log('Listening on 8888');
