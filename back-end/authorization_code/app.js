@@ -99,3 +99,6 @@ app.get("/dashboard", async (req, res) => {
   const tracks = await getData(link);
   console.log(tracks);
 })
+
+console.log("Listening on port 8888");
+app.listen(8888);
