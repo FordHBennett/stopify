@@ -11,9 +11,21 @@
 var express = require('express'); // Express web server framework
 var fetch = require('node-fetch');
 var cors = require('cors');
+const serverless = require('serverless-http');
 var querystring = require('querystring');
 var cookieParser = require('cookie-parser');
 const { response } = require('express');
+
+const router = express.Router();
+router.get('/', (req, res) => {
+  res.json({
+    'hello': 'hi!'
+  })
+})
+
+app.use('/.netlify/app', router);
+
+module.exports.handler = serverless(app);
 
 var client_id = 'd0b9b3b01a4c4977bb99be70d13c8e24'; // Your client id
 var client_secret = 'a79fa79340184ca6aebec28e555366f3'; // Your secret
