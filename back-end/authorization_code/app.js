@@ -52,6 +52,10 @@
    res.redirect('https://accounts.spotify.com/authorize?' + auth_query_parameters.toString());
  })
  
+ app.get('/dinosaur', function(req, res) {
+  console.log("dinosaur");
+ })
+ 
  app.get("/callback", async (req, res) => {
  
    // your application requests refresh and access tokens
@@ -89,12 +93,59 @@
  }
  
  app.get("/dashboard", async (req, res) => {
-   const playlists = await getData("/users/pauljwbae/playlists");
-   const items = playlists.items;
-   const playlist = items[1];
-   const link = "/users/pauljwbae/playlists/" + playlist.href.substring(playlist.href.indexOf("playlists/") + 10);
-   const tracks = await getData(link);
-   console.log(tracks);
+  const playlists = await getData("/users/pauljwbae/playlists");
+  const items = playlists.items;
+  console.log("playlists retrieved");
+  var playlistids = []
+  items.forEach(function(item) {
+    playlistids.push(item.id);
+  });
+  
+  console.log("playlist IDs retrieved");
+  //console.log(playlistids.length);
+  //const playlist = items[1];
+
+  //handles
+  /*
+  p userid
+  p userid-
+  p gen
+  g ttl-list
+  p playlst
+  p bad
+  p good
+  */
+
+
+  var songs = [];
+  for(let i = 0; i<playlistids.length; i++){
+    const link = "/users/pauljwbae/playlists/" + playlistids[i] + "/tracks";
+    //console.log(link);
+    const tracks = await getData(link);
+    //console.log(tracks)
+    for(let j = 0; j<tracks.items.length; j++){
+      //console.log(tracks.items[j]);
+      var found = false;
+      for(let k = 0; k<songs.length; k++) {
+        if(songs[k].name == tracks.items[j].track.name)
+          found = true;
+      }
+      if (!found)
+        songs.push(tracks.items[j].track);
+    }
+  }
+  var genres = [];
+  for(let i = 0; i<songs.length; i++) {
+    console.log(songs);
+    const link = "/users/pauljwbae/playlists/" + songs[i].name + "/tracks";
+  }
+
+
+  
+  
+   //const trackItems = tracks.items;
+   //const track = me
+
  })
  
  console.log('Listening on 8888');
