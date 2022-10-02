@@ -95,6 +95,7 @@ app.get("/dashboard", async (req, res) => {
   const playlist = items[1];
   const link = "/users/pauljwbae/playlists/" + playlist.href.substring(playlist.href.indexOf("playlists/") + 10);
   const tracks = await getData(link);
+  res.json({"playlist": playlist});
   console.log(tracks);
 })
 
