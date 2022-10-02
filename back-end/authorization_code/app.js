@@ -90,11 +90,18 @@ async function getData(endpoint) {
 
 app.get("/dashboard", async (req, res) => {
   const userInfo = await getData("/users/pauljwbae");
+<<<<<<< Updated upstream
   const playlists = userInfo.items;
   const tracks = await getData("/users/pauljwbae/playlists/" + playlists[1].href.substring(playlists[1].href.indexOf("playlists/") + 10));
   console.log(tracks);
   //res.render("dashboard");
   console.log(userInfo);
+=======
+  console.log(userInfo);
+  const playlists = userInfo.;
+  const tracks = await getData("/users/pauljwbae/playlists/" + playlists[1].href.substring(playlists[1].href.indexOf("playlists/") + 10));
+  console.log(tracks);
+>>>>>>> Stashed changes
 })
 
 console.log('Listening on 8888');
