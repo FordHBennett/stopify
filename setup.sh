@@ -5,6 +5,5 @@ echo install express
 npm audit fix --force
 cd back-end
 cd authorization_code
-node app.js
+cd public
 echo crtl-c to quit
-chmod +x setup.sh
