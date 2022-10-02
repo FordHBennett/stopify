@@ -14,11 +14,11 @@
  var querystring = require('querystring');
  var cookieParser = require('cookie-parser');
  const { response } = require('express');
- 
+
  var client_id = 'd0b9b3b01a4c4977bb99be70d13c8e24'; // Your client id
  var client_secret = 'a79fa79340184ca6aebec28e555366f3'; // Your secret
- var redirect_uri = 'https://63396d22c51f17400519d139--stoopify.netlify.app/callback'; // Your redirect uri
- 
+var redirect_uri = 'https://63396d22c51f17400519d139--stoopify.netlify.app/'; // Your redirect uri
+
  /**
   * Generates a random string containing numbers and letters
   * @param  {number} length The length of the string
@@ -27,21 +27,21 @@
  var generateRandomString = function(length) {
    var text = '';
    var possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
- 
+
    for (var i = 0; i < length; i++) {
      text += possible.charAt(Math.floor(Math.random() * possible.length));
    }
    return text;
  };
- 
+
  var stateKey = 'spotify_auth_state';
- 
+
  var app = express();
- 
+
  app.use(express.static(__dirname + '/public'))
     .use(cors())
     .use(cookieParser());
- 
+
  app.get('/login', function(req, res) {
    var auth_query_parameters = new URLSearchParams({
      response_type: 'code',
@@ -51,16 +51,16 @@
    })
    res.redirect('https://accounts.spotify.com/authorize?' + auth_query_parameters.toString());
  })
- 
+
  app.get('/dinosaur', function(req, res) {
   console.log("dinosaur");
  })
- 
+
  app.get("/callback", async (req, res) => {
- 
+
    // your application requests refresh and access tokens
    // after checking the state parameter'
- 
+
    const code = req.query.code;
    var body = new URLSearchParams({
      code: code,
@@ -80,7 +80,7 @@
    global.access_token = data.access_token;
    res.redirect("/dashboard");
  });
- 
+
  async function getData(endpoint) {
    const response = await fetch("https://api.spotify.com/v1" + endpoint, {
      method: "get",
@@ -91,7 +91,7 @@
    const data = await response.json();
    return data;
  }
- 
+
  app.get("/dashboard", async (req, res) => {
   const playlists = await getData("/users/pauljwbae/playlists");
   const items = playlists.items;
@@ -100,7 +100,7 @@
   items.forEach(function(item) {
     playlistids.push(item.id);
   });
-  
+
   console.log("playlist IDs retrieved");
   //console.log(playlistids.length);
   //const playlist = items[1];
@@ -136,17 +136,17 @@
   }
   var genres = [];
   for(let i = 0; i<songs.length; i++) {
-    //console.log(songs);
+    console.log(songs);
     const link = "/users/pauljwbae/playlists/" + songs[i].name + "/tracks";
   }
 
 
-  
-  
+
+
    //const trackItems = tracks.items;
    //const track = me
 
  })
- 
+
  console.log('Listening on 8888');
- app.listen("63396d22c51f17400519d139--stoopify.netlify.app/");
+app.listen('63396d22c51f17400519d139--stoopify.netlify.app/');
