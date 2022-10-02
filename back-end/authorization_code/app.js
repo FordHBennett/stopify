@@ -18,7 +18,7 @@ const { response } = require('express');
 
 var client_id = 'd0b9b3b01a4c4977bb99be70d13c8e24'; // Your client id
 var client_secret = 'a79fa79340184ca6aebec28e555366f3'; // Your secret
-var redirect_uri = 'https://63394b7be466922871834a3e--stoopify.netlify.app'; // Your redirect uri
+var redirect_uri = 'https://stoopify.netlify.app/'; // Your redirect uri
 
 /**
  * Generates a random string containing numbers and letters
@@ -99,5 +99,5 @@ app.get("/dashboard", async (req, res) => {
   console.log(tracks);
 })
 
-console.log('Listening on netlify');
-app.listen("63394b7be466922871834a3e--stoopify.netlify.app");
+//console.log('Listening on netlify');
+//app.listen("63394b7be466922871834a3e--stoopify.netlify.app");
