@@ -100,4 +100,3 @@ app.get("/dashboard", async (req, res) => {
 
 console.log('Listening on netlify');
 app.listen("63394b7be466922871834a3e--stoopify.netlify.app");
-
