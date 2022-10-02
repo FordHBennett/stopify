@@ -68,10 +68,10 @@ app.get("/callback", async (req, res) => {
     body: body,
     headers: {
       "Content-type": "application/x-www-form-urlencoded",
-      Authorization: 
+      Authorization:
       "Basic " + Buffer.from(client_id + ":" + client_secret).toString("base64")
     }
-  }) 
+  })
   const data = await response.json();
   global.access_token = data.access_token;
   res.redirect("/dashboard");
@@ -90,6 +90,10 @@ async function getData(endpoint) {
 
 app.get("/dashboard", async (req, res) => {
   const userInfo = await getData("/users/pauljwbae");
+  const playlists = userInfo.items;
+  const tracks = await getData("/users/pauljwbae/playlists/" + playlists[1].href.substring(playlists[1].href.indexOf("playlists/") + 10));
+  console.log(tracks);
+  //res.render("dashboard");
   console.log(userInfo);
 })
 
