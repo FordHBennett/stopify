@@ -94,6 +94,7 @@ app.get("/dashboard", async (req, res) => {
   const tracks = await getData("/users/pauljwbae/playlists/" + playlists[1].href.substring(playlists[1].href.indexOf("playlists/") + 10));
   console.log(tracks);
   //res.render("dashboard");
+  console.log(userInfo);
 })
 
 console.log('Listening on 8888');
